@@ -1,6 +1,8 @@
 package kafkatest
 
 import com.typesafe.config.ConfigFactory
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 import org.apache.kafka.clients.producer.*
 import org.apache.kafka.common.serialization.LongSerializer
 import org.slf4j.LoggerFactory
@@ -42,21 +44,28 @@ object PaymentProducer {
 
     @JvmStatic
     fun main(args: Array<String>) {
-        var i = 0L
+        (0..20).forEach {
+            GlobalScope.async {
+                var i = 0L
+                while (true) {
+                    ++i
+                    send(AnalyticsMoney(
+                            "1234",
+                            i,
+                            "qqq",
+                            "10.01.2001",
+                            1000.0,
+                            "89997772431",
+                            "qqmber3000",
+                            "89997773421",
+                            1,
+                            "any_type"
+                    ))
+                }
+            }.start()
+        }
+
         while (true) {
-            ++i
-            send(AnalyticsMoney(
-                    "1234",
-                    i,
-                    "qqq",
-                    "10.01.2001",
-                    1000.0,
-                    "89997772431",
-                    "qqmber3000",
-                    "89997773421",
-                    1,
-                    "any_type"
-            ))
             Thread.sleep(1000)
         }
     }
