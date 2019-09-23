@@ -42,18 +42,23 @@ object PaymentProducer {
 
     @JvmStatic
     fun main(args: Array<String>) {
-        send(AnalyticsMoney(
-                "1234",
-                124356678,
-                "qqq",
-                "10.01.2001",
-                1000.0,
-                "89997772431",
-                "qqmber3000",
-                "89997773421",
-                1,
-                "any_type"
-        ))
+        var i = 0L
+        while (true) {
+            ++i
+            send(AnalyticsMoney(
+                    "1234",
+                    i,
+                    "qqq",
+                    "10.01.2001",
+                    1000.0,
+                    "89997772431",
+                    "qqmber3000",
+                    "89997773421",
+                    1,
+                    "any_type"
+            ))
+            Thread.sleep(1000)
+        }
     }
 
 }

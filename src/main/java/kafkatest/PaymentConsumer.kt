@@ -36,7 +36,7 @@ object PaymentConsumer {
             val consumerRecords = consumer.poll(1000)
             consumerRecords.forEach { record ->
                 val pay = record.value()
-                println(pay)
+                println(pay.timestamp)
             }
 
             Thread.sleep(500)
